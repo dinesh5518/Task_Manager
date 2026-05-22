@@ -27,6 +27,13 @@ export const useAuthStore = create(
                         isAuthenticated: true, 
                         loading: false 
                     });
+                    // persist token and user for axios interceptor compatibility
+                    try {
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('user', JSON.stringify(userData));
+                    } catch (e) {
+                        // ignore storage errors
+                    }
                     return true;
                 } catch (error) {
                     set({ 
@@ -54,10 +61,25 @@ export const useAuthStore = create(
 
             logout: () => {
                 set({ user: null, token: null, isAuthenticated: false });
-                localStorage.removeItem('token');
+                try {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                } catch (e) {}
             },
             
             clearError: () => set({ error: null }),
+
+            updateUser: (partial) => {
+                set((state) => {
+                    const nextUser = { ...state.user, ...partial };
+                    try {
+                        localStorage.setItem('user', JSON.stringify(nextUser));
+                    } catch (e) {
+                        // ignore storage errors
+                    }
+                    return { user: nextUser };
+                });
+            },
 
             initAuth: () => {
                 const token = localStorage.getItem('token');

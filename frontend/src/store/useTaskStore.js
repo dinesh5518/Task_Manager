@@ -21,21 +21,27 @@ export const useTaskStore = create((set, get) => ({
         try {
             const response = await axiosInstance.post('/tasks', taskData);
             set((state) => ({ tasks: [...state.tasks, response.data], loading: false }));
+            return response.data;
         } catch (error) {
-            set({ error: error.message, loading: false });
+            set({ error: error.response?.data?.message || error.message, loading: false });
+            throw error;
         }
     },
 
     updateTask: async (id, taskData) => {
         set({ loading: true, error: null });
         try {
-            const response = await axiosInstance.put(`/tasks/${id}`, taskData);
+            const existingTask = get().tasks.find((task) => task.id === id);
+            const payload = existingTask ? { ...existingTask, ...taskData } : taskData;
+            const response = await axiosInstance.put(`/tasks/${id}`, payload);
             set((state) => ({
                 tasks: state.tasks.map(task => task.id === id ? response.data : task),
                 loading: false
             }));
+            return response.data;
         } catch (error) {
-            set({ error: error.message, loading: false });
+            set({ error: error.response?.data?.message || error.message, loading: false });
+            throw error;
         }
     },
 
@@ -47,8 +53,10 @@ export const useTaskStore = create((set, get) => ({
                 tasks: state.tasks.filter(task => task.id !== id),
                 loading: false
             }));
+            return true;
         } catch (error) {
-            set({ error: error.message, loading: false });
+            set({ error: error.response?.data?.message || error.message, loading: false });
+            throw error;
         }
     },
     

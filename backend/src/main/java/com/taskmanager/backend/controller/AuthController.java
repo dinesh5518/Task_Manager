@@ -75,6 +75,7 @@ public class AuthController {
                 .name(signUpRequest.getName())
                 .email(signUpRequest.getEmail())
                 .password(encoder.encode(signUpRequest.getPassword()))
+                .settings(com.taskmanager.backend.models.UserSettings.builder().build())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();

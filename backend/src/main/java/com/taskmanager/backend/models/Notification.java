@@ -8,34 +8,18 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "users")
-public class User {
-    
+@Document(collection = "notifications")
+public class Notification {
     @Id
     private String id;
-    
-    private String name;
-    
-    private String email;
-    
-    private String password;
-    
-    private String avatar;
-
-    private String bio;
-
-    @Builder.Default
-    private UserSettings settings = UserSettings.builder().build();
-    
-    private Set<Role> roles;
-    
+    private String userId;
+    private String type;
+    private String message;
+    private boolean read;
     private LocalDateTime createdAt;
-    
-    private LocalDateTime updatedAt;
 }
