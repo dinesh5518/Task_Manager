@@ -37,7 +37,7 @@ export const useAuthStore = create(
                     return true;
                 } catch (error) {
                     set({ 
-                        error: error.response?.data?.message || 'Login failed', 
+                        error: error.response?.data?.message || error.message || 'Login failed', 
                         loading: false 
                     });
                     return false;
@@ -52,7 +52,7 @@ export const useAuthStore = create(
                     return true;
                 } catch (error) {
                     set({ 
-                        error: error.response?.data?.message || 'Signup failed', 
+                        error: error.response?.data?.message || error.message || 'Signup failed', 
                         loading: false 
                     });
                     return false;
