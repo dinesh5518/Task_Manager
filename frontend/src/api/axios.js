@@ -1,7 +1,9 @@
 ﻿import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL
-  || (import.meta.env.DEV ? 'http://localhost:8080/api' : (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api'));
+const rawApiUrl = import.meta.env.VITE_API_URL;
+const API_URL = rawApiUrl
+  ? `${rawApiUrl.replace(/\/+$/, '')}/api`
+  : (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api');
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
