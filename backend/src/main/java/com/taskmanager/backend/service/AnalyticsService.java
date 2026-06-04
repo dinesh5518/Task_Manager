@@ -15,7 +15,6 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -164,7 +163,6 @@ public class AnalyticsService {
         long activeDays = activityByDay.entrySet().stream().filter(entry -> !entry.getKey().isBefore(thirtyDaysAgo)).count();
         int completionConsistency = (int) Math.round((activeDays * 100.0) / 7.0);
 
-        LocalDate todayStart = today;
         LocalDate weekEnd = weekStart.plusDays(6);
         LocalDate monthEnd = monthStart.plusMonths(1).minusDays(1);
 

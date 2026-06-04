@@ -1,10 +1,7 @@
 ﻿import axios from 'axios';
 
-const defaultBaseURL = import.meta.env.DEV
-  ? 'https://task-manager-vgid.onrender.com'
-  : (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api');
-
-const API_URL = import.meta.env.VITE_API_URL || defaultBaseURL;
+const API_URL = import.meta.env.VITE_API_URL
+  || (import.meta.env.DEV ? 'http://localhost:8080/api' : (typeof window !== 'undefined' ? `${window.location.origin}/api` : '/api'));
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

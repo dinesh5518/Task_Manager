@@ -5,7 +5,6 @@ import com.taskmanager.backend.models.Task;
 import com.taskmanager.backend.models.TaskStatus;
 import com.taskmanager.backend.models.User;
 import com.taskmanager.backend.repository.TaskRepository;
-import com.taskmanager.backend.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

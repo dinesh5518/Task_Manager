@@ -1,7 +1,6 @@
 package com.taskmanager.backend.controller;
 
 import com.taskmanager.backend.models.Task;
-import com.taskmanager.backend.models.TaskStatus;
 import com.taskmanager.backend.models.User;
 import com.taskmanager.backend.repository.UserRepository;
 import com.taskmanager.backend.service.TaskService;
@@ -11,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
